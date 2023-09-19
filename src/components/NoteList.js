@@ -1,6 +1,8 @@
 import styled from "@emotion/styled";
 
 import Note from "./Note";
+import { useContext } from "react";
+import userContext from "./Context/userContext";
 
 const Container = styled.div`
   display: grid;
@@ -8,7 +10,8 @@ const Container = styled.div`
   grid-template-columns: 1fr 1fr;
 `;
 
-function NoteList({ notes, user, onDelete }) {
+function NoteList({ notes, onDelete }) {
+  const { user } = useContext(userContext);
   return (
     <Container>
       {notes.map((note) => (
