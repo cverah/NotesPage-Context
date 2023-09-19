@@ -4,6 +4,7 @@ import { useLocalStorage } from "./hooks";
 import NotesPage from "./pages/NotesPage";
 import LoginPage from "./pages/LoginPage";
 import { UserProvider } from "./components/Context/userContext";
+import { NotesProvider } from "./components/Context/notesContext";
 
 export default function App() {
   const [user, setuser] = useState("");
@@ -33,12 +34,13 @@ export default function App() {
           <Route
             path="/"
             element={
-              <NotesPage
-                notes={notes}
-                onLogout={handleLogout}
-                onDelete={handleDelete}
-                onCreate={handleCreate}
-              />
+              <NotesProvider value={{ notes }}>
+                <NotesPage
+                  onLogout={handleLogout}
+                  onDelete={handleDelete}
+                  onCreate={handleCreate}
+                />
+              </NotesProvider>
             }
           />
           <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />

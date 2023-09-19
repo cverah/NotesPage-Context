@@ -6,6 +6,7 @@ import NoteForm from "../components/NoteForm";
 import NoteList from "../components/NoteList";
 import { useContext, useEffect } from "react";
 import userContext from "../components/Context/userContext";
+import notesContext from "../components/Context/notesContext";
 
 const Container = styled.div`
   display: flex;
@@ -20,8 +21,9 @@ const LogoutButton = styled(Button)`
   right: 8px;
 `;
 
-function NotesPage({ notes, onLogout, onDelete, onCreate }) {
+function NotesPage({ onLogout, onDelete, onCreate }) {
   const { user } = useContext(userContext);
+  const { notes } = useContext(notesContext);
   // console.log(user);
   const navigate = useNavigate();
 
@@ -33,7 +35,7 @@ function NotesPage({ notes, onLogout, onDelete, onCreate }) {
     <Container>
       <LogoutButton onClick={onLogout}>Logout</LogoutButton>
       <NoteForm onCreate={onCreate} />
-      <NoteList notes={notes} onDelete={onDelete} />
+      <NoteList onDelete={onDelete} />
     </Container>
   );
 }
